@@ -6,6 +6,7 @@
 - [Hashmap](#hashmap)
 - [Pointers](#pointers)
   - [Move zeroes](#move-zeroes)
+  - [Boats to save people](#boats-to-save-people)
 - [Sliding window](#sliding-window)
 - [Stack](#stack)
 - [Monotonic stack](#monotonic-stack)
@@ -69,6 +70,43 @@ let moveZeroes = function (nums) {
     right++;
   }
 };
+```
+### [`Boats to save people`](https://leetcode.com/problems/boats-to-save-people)
+Задача: Переместить (парами) людей на лодки в соответствии с лимитом общего веса для лодки. 
+
+```javascript
+[3,5,2,3] // исходный массив людей разного веса
+limit = 5  // лимит веса для лодки.
+
+/** 
+ *     L        R    |  5+2 = 8; 
+ *   [ 5, 3, 3, 2 ]  |  boats++, left++;
+ *                   |  
+ *        L     R    |  3+2 = 5; 
+ *   [ 5, 3, 3, 2 ]  |  right++, boats++, left++; 
+ *                   |  
+ *           LR      |  3+3 = 6; 
+ *   [ 5, 3, 3, 2 ]  |  boats++, break;
+ * 
+ *   Необходимо отсортировать массив.
+ *   Указатели на концах массива
+ *   пока указатели не встретятся считать лодки и двигаем левый указатель вправо
+ *   если сумма весов левого и правого не превышает лимита,
+ *     сдвигаем правый указатель влево (уменьшаем).
+ */
+
+var numRescueBoats = function (people, limit) {
+  people.sort((a, b) => b - a);
+
+  var left = 0, right = people.length - 1, boats = 0;
+  while (left <= right) {
+    if (people[left] + people[right] <= limit) right--;
+    boats++;
+    left++
+  }
+  return boats;
+};
+
 ```
 
 ## Sliding window
