@@ -7,6 +7,7 @@
 - [Pointers](#pointers)
   - [Move zeroes](#move-zeroes)
   - [Boats to save people](#boats-to-save-people)
+  - [Valid Palindrome II](#valid-palindrome-ii)
 - [Sliding window](#sliding-window)
 - [Stack](#stack)
 - [Monotonic stack](#monotonic-stack)
@@ -105,6 +106,59 @@ var numRescueBoats = function (people, limit) {
     left++
   }
   return boats;
+};
+
+```
+
+### [`Valid Palindrome II`](https://leetcode.com/problems/Valid-Palindrome-ii)
+ > Задача: вернуть true/false, если строка может стать палиндромом после удаления одного символа.
+
+```javascript
+[a,b,c,a] // исходная строка
+
+/** 
+ *     L           R                           |  L === R
+ *   [ a, b, c, c, a ]                         |  left++; right++
+ *                                             |  
+ *        L     R                              |  L !== R
+ *   [ a, b, c, c, a ]                         |  [ a, _, c, c, a ]  ||  [ a, b, c, _, a ]
+ *                                             |   
+ *                                             |  
+ *           L  R                L  R          |  
+ *   [ a, _, c, c, a ]  ||  [ a, b, c, _, a ]  |   
+ *          L == R      ||      L !== R        |    
+ *           True                False         |  
+ *               \                             |
+ *                return true                  |
+ *                                             |
+ *   Указатели находятся на краницах строки
+ *   пока левый указательи меньше правого
+ *      если левый сивол не равен правому пробуем (удалить) пропустить один из них.
+ *          isPalindrome(left + 1, right) || isPalindrome(left, right - 1)
+ *            в каждом вызове двигаем указатели пока они равны.
+ *          из каждого вызова возращаем результат провперки  return true/false || true/false
+ *      иначе возвращаем true  
+ *
+ */
+
+const validPalindrome = (s) => {
+    const isPalindrome = (left,right) => {
+        while(left < right){            
+           if(s[left++] !== s[right--]) return false;
+        }
+        return true;
+    };
+
+    let left = 0;
+    let right = s.length-1;
+    while(left < right){
+        if(s[left] != s[right]){
+            return isPalindrome(left+1,right) || isPalindrome(left,right-1);
+        }        
+        left++; 
+        right--;
+    }
+    return true;
 };
 
 ```
