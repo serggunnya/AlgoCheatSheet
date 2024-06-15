@@ -10,6 +10,7 @@
   - [Valid Palindrome II](#valid-palindrome-ii)
 - [Sliding window](#sliding-window)
 - [Stack](#stack)
+   - [Backspace String Compare](#backspace-string-compare)
 - [Monotonic stack](#monotonic-stack)
 - [Math](#math)
 - [Knapsack](#knapsack)
@@ -18,7 +19,6 @@
 - [DFS](#dfs)
 
 ## Prefix sum
-
 
 ## Bucket sort
 
@@ -166,6 +166,63 @@ const validPalindrome = (s) => {
 ## Sliding window
 
 ## Stack
+### [`Backspace String Compare`](https://leetcode.com/problems/backspacce-string-compare)
+ > Задача: вернуть true/false, если строки совпадают после backspace удаления симоволов (отмечено как #),
+ >
+ > строки s = "xwrmp" , t = "xwrmu#p"
+ 
+```js
+
+/** 
+ *    i           |  stackA []
+ *   "xwrmp"      |  stackB []   
+ *   "xwrmu#p"    |  
+ *                |  
+ *     i          |  stackA ["x"]   
+ *   "xwrmp"      |  stackB ["x"] 
+ *   "xwrmu#p"    |
+ *                |
+ *      i         |  stackA ["x", "w"]
+ *   "xwrmp"      |  stackB ["x", "w"]
+ *   "xwrmu#p"    |
+ *                |
+ *       i        |  stackA ["x", "w", "r"]
+ *   "xwrmp"      |  stackB ["x", "w", "r"] 
+ *   "xwrmu#p"    |
+ *                |
+ *        i       |  stackA ["x", "w", "r", "m" ]
+ *   "xwrmp"      |  stackB ["x", "w", "r", "m" ]  
+ *   "xwrmu#p"    |
+ *                |
+*          i      |  stackA ["x", "w", "r", "m","p" ]
+ *   "xwrmp"      |  stackB ["x", "w", "r", "m","u" ]  
+ *   "xwrmu#p"    |
+ *                |
+ *          i     |  stackA ["x", "w", "r", "m","p" ]
+ *   "xwrmp"      |  stackB ["x", "w", "r", "m","p" ]  
+ *   "xwrmu#p"    |
+ *                |
+ * 
+ *   полняются два стека
+ *   eсли симол === "#" , то извлекаем из стека последний
+ *   иначе добавляем текущий символ (или пустой)
+ */
+
+
+var backspaceCompare = function(s, t) {
+    var len = s.length >= t.length ? s.length: t.length;
+    var stackA = [], stackB = [];
+
+    for(var i = 0; i < len; i++ ){
+      if(s[i] === "#" ) stackA.pop()
+      else stackA.push(s[i] || "") 
+      
+      if(t[i] === "#" ) stackB.pop()
+      else stackB.push(t[i] || "")       
+    }
+    return stackA.join("") === stackB.join("")
+};
+```
 
 ## Monotonic stack
 
