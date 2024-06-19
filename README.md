@@ -8,8 +8,9 @@
   - [Move zeroes](#move-zeroes)
   - [Boats to save people](#boats-to-save-people)
   - [Valid Palindrome II](#valid-palindrome-ii)
+  - [Two sum II input array is sorted`](#two-sum-ii-input-array-is-sorted)
 - [Sliding window](#sliding-window)
-- [Stack](#stack)
+- [Stack](#stack)  
    - [Backspace String Compare](#backspace-string-compare)
 - [Monotonic stack](#monotonic-stack)
 - [Math](#math)
@@ -27,10 +28,10 @@
 ## Pointers
 
 ### [`Move zeroes`](https://leetcode.com/problems/move-zeroes/)
-Задача: Переместить нули в конец массива, сохраняя порядок остальных цифр
+> Задача: Переместить нули в конец массива, сохраняя порядок остальных цифр
+> [0,1,0,3,12] - исходный массив
 
 ```javascript
-[0,1,0,3,12] // исходный массив
 
 /** 
  *    LR
@@ -73,12 +74,11 @@ let moveZeroes = function (nums) {
 };
 ```
 ### [`Boats to save people`](https://leetcode.com/problems/boats-to-save-people)
-Задача: Переместить (парами) людей на лодки в соответствии с лимитом общего веса для лодки. 
+> Задача: Переместить (парами) людей на лодки в соответствии с лимитом общего веса для лодки. 
+> [3,5,2,3]  исходный массив людей разного веса
+> limit = 5  лимит веса для лодки.
 
 ```javascript
-[3,5,2,3] // исходный массив людей разного веса
-limit = 5  // лимит веса для лодки.
-
 /** 
  *     L        R    |  5+2 = 8; 
  *   [ 5, 3, 3, 2 ]  |  boats++, left++;
@@ -111,10 +111,10 @@ var numRescueBoats = function (people, limit) {
 ```
 
 ### [`Valid Palindrome II`](https://leetcode.com/problems/Valid-Palindrome-ii)
- > Задача: вернуть true/false, если строка может стать палиндромом после удаления одного символа.
+> Задача: вернуть true/false, если строка может стать палиндромом после удаления одного символа.
+> "abca" - исходная строка
 
 ```javascript
-[a,b,c,a] // исходная строка
 
 /** 
  *     L           R                           |  L === R
@@ -131,7 +131,7 @@ var numRescueBoats = function (people, limit) {
  *               \                             |
  *                return true                  |
  *                                             |
- *   Указатели находятся на краницах строки
+ *   Указатели находятся на границах строки
  *   пока левый указательи меньше правого
  *      если левый сивол не равен правому пробуем (удалить) пропустить один из них.
  *          isPalindrome(left + 1, right) || isPalindrome(left, right - 1)
@@ -159,6 +159,45 @@ const validPalindrome = (s) => {
         right--;
     }
     return true;
+};
+
+```
+### [`Two sum II input array is sorted`](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted)
+> Задача: Вернуть инзексы двух элементов в отсортированом массиве, чья сума равно заданому числу
+> [1,2,7,11,15] - исходный массив
+> target = 9 - искомая сумма
+
+```javascript
+/** 
+ *     L             R     |
+ *   [ 1, 2, 7, 11, 15 ]   |
+ *                         |
+ *     L        R          |
+ *   [ 1, 2, 7, 11, 15 ]   |
+ *                         |
+ *     L     R             |
+ *   [ 1, 2, 7, 11, 15 ]   |
+ *                         |
+ *        L  R             |
+ *   [ 1, 2, 7, 11, 15 ]   |
+ *                         |
+ *   Указатели находятся на границах массива
+ *   Если сумма левого и правого элемента равно target
+ *      вернуть ответ 
+ *   Если сумма левого и правого элемента больше target
+ *      правый указатель сдвигается влево (r--)
+ *      иначе левый сдвигается враво (l++)
+ *
+ */
+
+var twoSum = function(nums, target) {
+   var l = 0, r = nums.length-1;    
+   while(l < r){
+    if(nums[l] + nums[r] === target) return [l+1,r+1];    
+    else if(nums[l] + nums[r] > target) r--;
+    else l++;
+   }
+   return [];
 };
 
 ```
