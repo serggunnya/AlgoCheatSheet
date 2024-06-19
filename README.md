@@ -29,6 +29,7 @@
 
 ### [`Move zeroes`](https://leetcode.com/problems/move-zeroes/)
 > Задача: Переместить нули в конец массива, сохраняя порядок остальных цифр
+> 
 > [0,1,0,3,12] - исходный массив
 
 ```javascript
@@ -74,8 +75,10 @@ let moveZeroes = function (nums) {
 };
 ```
 ### [`Boats to save people`](https://leetcode.com/problems/boats-to-save-people)
-> Задача: Переместить (парами) людей на лодки в соответствии с лимитом общего веса для лодки. 
+> Задача: Переместить (парами) людей на лодки в соответствии с лимитом общего веса для лодки.
+> 
 > [3,5,2,3]  исходный массив людей разного веса
+> 
 > limit = 5  лимит веса для лодки.
 
 ```javascript
@@ -112,6 +115,7 @@ var numRescueBoats = function (people, limit) {
 
 ### [`Valid Palindrome II`](https://leetcode.com/problems/Valid-Palindrome-ii)
 > Задача: вернуть true/false, если строка может стать палиндромом после удаления одного символа.
+> 
 > "abca" - исходная строка
 
 ```javascript
@@ -164,7 +168,9 @@ const validPalindrome = (s) => {
 ```
 ### [`Two sum II input array is sorted`](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted)
 > Задача: Вернуть инзексы двух элементов в отсортированом массиве, чья сума равно заданому числу
+> 
 > [1,2,7,11,15] - исходный массив
+> 
 > target = 9 - искомая сумма
 
 ```javascript
