@@ -9,6 +9,7 @@
   - [Boats to save people](#boats-to-save-people)
   - [Valid Palindrome II](#valid-palindrome-ii)
   - [Two sum II input array is sorted`](#two-sum-ii-input-array-is-sorted)
+  - [Remove Duplicates II`](#two-sum-ii-input-array-is-sorted)
 - [Sliding window](#sliding-window)
 - [Stack](#stack)  
    - [Backspace String Compare](#backspace-string-compare)
@@ -205,6 +206,90 @@ var twoSum = function(nums, target) {
    }
    return [];
 };
+
+```
+```
+### [`Remove Duplicates II`](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii)
+> Задача: Оставить не более двух дубликатов 
+> 
+> [ 0, 0, 1, 1, 1, 1, 2, 3, 3 ] - исходный массив
+> 
+
+```javascript
+/** 
+ *    LR                             |  cnt = 1
+ *   [ 0, 0, 1, 1, 1, 1, 2, 3, 3 ]   |  R === R + 1  ----> cnt++;
+ *                                   |  nums[L] = nums[R]
+ *                                   |  R++, L++, cnt++;
+ *                                   |  
+ *       LR                          |  cnt = 2
+ *   [ 0, 0, 1, 1, 1, 1, 2, 3, 3 ]   |  R !== R + 1  ----> cnt = 1;
+ *                                   |  nums[L] = nums[R] 
+ *                                   |  R++, L++, 
+ *                                   |
+ *                                   |
+ *           LR                      |  cnt = 1
+ *   [ 0, 0, 1, 1, 1, 1, 2, 3, 3 ]   |  R === R + 1  ----> cnt++;
+ *                                   |  nums[L] = nums[R] 
+ *                                   |  R++, L++, 
+ *                                   |
+ *             LR                    |  cnt = 2
+ *   [ 0, 0, 1, 1, 1, 1, 2, 3, 3 ]   |  R === R + 1  ----> cnt++;
+ *                                   |  nums[L] = nums[R] 
+ *                                   |  R++
+ *                                   |
+ *                                   |
+ *              L  R                 |  cnt = 3
+ *   [ 0, 0, 1, 1, 1, 1, 2, 3, 3 ]   |  R === R + 1  ----> cnt++;
+ *                                   |  nums[L] = nums[R] 
+ *                                   |  R++,
+ *                                   |
+ *                                   |
+ *              L     R              |  cnt = 4
+ *   [ 0, 0, 1, 1, 1, 1, 2, 3, 3 ]   |  R === R + 1  ----> cnt = 1 
+ *                                   |  nums[L] = nums[R] 
+ *                                   |  R++, L++, 
+ *                                   |
+ *                 L     R           |  cnt = 1
+ *   [ 0, 0, 1, 1, 1, 1, 2, 3, 3 ]   |  R === R + 1  ----> cnt = 1 
+ *                                   |  nums[L] = nums[R] 
+ *                                   |  R++, L++, 
+ *                                   |
+ *                    L     R        |  cnt = 1
+ *   [ 0, 0, 1, 1, 2, 1, 2, 3, 3 ]   |  R === R + 1  ----> cnt++
+ *                                   |  nums[L] = nums[R] 
+ *                                   |  R++, L++, 
+ *                                   |
+ *                       L     R     |  cnt = 2
+ *   [ 0, 0, 1, 1, 2, 3, 2, 3, 3 ]   |  R === R + 1  ----> cnt = 1 
+ *                                   |  nums[L] = nums[R] 
+ *                                   |  R++, L++, 
+ *                                   |
+ *                          L  R     |  
+ *   [ 0, 0, 1, 1, 2, 3, 3, 3, 3 ]   |  break;
+ *                                   |  return L (7)
+ *                                   |  
+ *
+ *   
+ *   
+ *   
+ *   
+ *   
+ */
+
+function removeDuplicates(nums) {
+    var l = 0, cnt = 1;
+    for (var r = 0; r < nums.length; r++) {
+        if (nums[r] === nums[r + 1]) cnt++;
+        else cnt = 1;
+
+        if (cnt <= 2) {
+            nums[l] = nums[r]
+            l++;
+        }
+    };
+    return l
+}
 
 ```
 
