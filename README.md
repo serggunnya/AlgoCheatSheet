@@ -9,7 +9,7 @@
   - [Boats to save people](#boats-to-save-people)
   - [Valid Palindrome II](#valid-palindrome-ii)
   - [Two sum II input array is sorted`](#two-sum-ii-input-array-is-sorted)
-  - [Remove Duplicates II`](#two-sum-ii-input-array-is-sorted)
+  - [Remove Duplicates II`](#remove-duplicates-ii)
 - [Sliding window](#sliding-window)
 - [Stack](#stack)  
    - [Backspace String Compare](#backspace-string-compare)
