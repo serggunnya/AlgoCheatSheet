@@ -165,10 +165,10 @@ const validPalindrome = (s) => {
     }
     return true;
 };
-
 ```
+
 ### [`Two sum II input array is sorted`](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted)
-> Задача: Вернуть инзексы двух элементов в отсортированом массиве, чья сума равно заданому числу
+> Задача: Вернуть индексы двух элементов в отсортированом массиве, чья сума равно заданому числу
 > 
 > [1,2,7,11,15] - исходный массив
 > 
@@ -208,7 +208,7 @@ var twoSum = function(nums, target) {
 };
 
 ```
-```
+
 ### [`Remove Duplicates II`](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii)
 > Задача: Оставить не более двух дубликатов 
 > 
