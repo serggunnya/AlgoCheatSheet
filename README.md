@@ -11,8 +11,9 @@
   - [Two sum II input array is sorted`](#two-sum-ii-input-array-is-sorted)
   - [Remove Duplicates II`](#remove-duplicates-ii)
 - [Sliding window](#sliding-window)
-- [Stack](#stack)  
+- [Stack/Queue](#stack-queue)  
    - [Backspace String Compare](#backspace-string-compare)
+   - [Duplicate Zeros](#duplicate-zeros)
 - [Monotonic stack](#monotonic-stack)
 - [Math](#math)
 - [Knapsack](#knapsack)
@@ -295,7 +296,7 @@ function removeDuplicates(nums) {
 
 ## Sliding window
 
-## Stack
+## Stack Queue
 ### [`Backspace String Compare`](https://leetcode.com/problems/backspacce-string-compare)
  > Задача: вернуть true/false, если строки совпадают после backspace удаления симоволов (отмечено как #),
  >
@@ -333,7 +334,7 @@ function removeDuplicates(nums) {
  *   "xwrmu#p"    |
  *                |
  * 
- *   полняются два стека
+ *   заполняются два стека
  *   eсли симол === "#" , то извлекаем из стека последний
  *   иначе добавляем текущий символ (или пустой)
  */
@@ -351,6 +352,62 @@ var backspaceCompare = function(s, t) {
       else stackB.push(t[i] || "")       
     }
     return stackA.join("") === stackB.join("")
+};
+```
+### [`Duplicate Zeros`](https://leetcode.com/problems/duplicate-zeros)
+ > Задача: дублировать нули сохраняя порядок чисел и длину массива.
+ > [1,0,2,3,0,4,5,0] 
+ 
+```js
+
+/** 
+ *    i                  |  
+ *   [1,0,2,3,0,4,5,0]   |  queue = [] 
+ *                       |  
+ *      i                |  
+ *   [1,0,2,3,0,4,5,0]   |  queue = [0] 
+ *                       |  
+ *        i              |  
+ *   [1,0,2,3,0,4,5,0]   |  queue = [0,2] 
+ *   [1,0,0,3,0,4,5,0]   |  queue = [2] 
+ *                       |  
+ *          i            |  
+ *   [1,0,0,3,0,4,5,0]   |  queue = [2,3] 
+ *   [1,0,0,2,0,4,5,0]   |  queue = [3] 
+ *                       |
+ *            i          |  
+ *   [1,0,0,2,0,4,5,0]   |  queue = [3,0] 
+ *   [1,0,0,2,3,4,5,0]   |  queue = [0,0] 
+ *                       |  
+ *              i        |  
+ *   [1,0,0,2,0,4,5,0]   |  queue = [0,0,4] 
+ *   [1,0,0,2,3,0,5,0]   |  queue = [0,4] 
+ *                       |  
+ *                i      |  
+ *   [1,0,0,2,3,0,5,0]   |  queue = [0,4] 
+ *   [1,0,0,2,3,0,0,0]   |  queue = [4] 
+ *                       |  
+ *                  i    |  
+ *   [1,0,0,2,3,0,0,0]   |  queue = [4] 
+ *   [1,0,0,2,3,0,0,4]   |  queue = [] 
+ * 
+ *   Создаётся стэк (очередь)
+ *   Если элемент равен нулю в стэк (очередь) добавляется ноль
+ *   Если в стэк(очередь) не пуст
+ *       текущий элемент добавляется в стэк(очередь)
+ *       первый (левый) элемент стэка (очереди) измается и записывается вместо текущего num[i]
+ */
+
+var duplicateZeros = function(arr) {
+    var stack = [];
+    for(var i = 0; i < arr.length; i++){
+        if(arr[i] === 0) stack.push(0);
+
+        if(stack.length){
+            stack.push(arr[i]);
+            arr[i] = stack.shift();
+        }
+    }
 };
 ```
 
