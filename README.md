@@ -10,6 +10,7 @@
   - [Valid Palindrome II](#valid-palindrome-ii)
   - [Two sum II input array is sorted`](#two-sum-ii-input-array-is-sorted)
   - [Remove Duplicates II`](#remove-duplicates-ii)
+  - [Trapping Rain Water`](#trapping-rain-water)
 - [Sliding window](#sliding-window)
 - [Stack/Queue](#stack-queue)  
    - [Backspace String Compare](#backspace-string-compare)
@@ -291,6 +292,88 @@ function removeDuplicates(nums) {
     };
     return l
 }
+
+```
+### [`Trapping Rain Water`](https://leetcode.com/problems/trapping-rain-water)
+> Задача: Дан массив высот блоков. Посчитать число заполненых водой ечеек.
+> 
+> [ 0, 0, 1, 1, 1, 1, 2, 3, 3 ] - исходный массив
+> 
+
+```javascript
+/** 
+ *      L                 R        | 5 < 6
+ *     [5,5,1,7,1,1,5,2,7,6]       | lmax = 5
+ *  lMax|                 |rMax    | emptyCell += lMax - nums[l] = 0; 
+ *                                 | L++;
+ *                                 | 
+ *        L               R        | 5 < 6
+ *     [5,5,1,7,1,1,5,2,7,6]       | lmax = 5
+ *  lMax|                 |rMax    | emptyCell += lMax - nums[l] = 0; 
+ *                                 | L++;
+ *                                 | 
+ *          L             R        | 1 < 6
+ *     [5,5,1,7,1,1,5,2,7,6]       | lmax = 5
+ *  lMax|                 |rMax    | emptyCell += lMax - nums[l] = 4; 
+ *                                 | L++;
+ *                                 | 
+ *            L           R        | 7 > 6
+ *     [5,5,1,7,1,1,5,2,7,6]       | rmax = 6
+ *  lMax|                 |rMax    | emptyCell += rMax - nums[r] = 0; 
+ *                                 | R++;
+ *                                 | 
+ *            L         R          | 7 === 7
+ *     [5,5,1,7,1,1,5,2,7,6]       | lMax = 7
+ *  lMax|                 |rMax    | emptyCell += lMax - nums[l] = 0; 
+ *                                 | L++;
+ *                                 | 
+ *              L       R          | 1 < 7
+ *     [5,5,1,7,1,1,5,2,7,6]       | lMax = 7
+ *        lMax|           |rMax    | emptyCell += lMax - nums[l] = 10; 
+ *                                 | L++;
+ *                                 | 
+ *                L     R          | 1 < 7
+ *     [5,5,1,7,1,1,5,2,7,6]       | lMax = 7
+ *        lMax|           |rMax    | emptyCell += lMax - nums[l] = 16; 
+ *                                 | L++;
+ *                                 | 
+ *                  L   R          | 5 < 7
+ *     [5,5,1,7,1,1,5,2,7,6]       | lMax = 7
+ *        lMax|           |rMax    | emptyCell += lMax - nums[l] = 18; 
+ *                                 | L++;
+ *                                 | 
+ *                    L R          | 2 < 7
+ *     [5,5,1,7,1,1,5,2,7,6]       | lMax = 7
+ *        lMax|           |rMax    | emptyCell += lMax - nums[l] = 23; 
+ *                                 | L++;
+ *                                 | 
+ *                                 |
+ *
+ *   
+ *   
+ *   
+ *   
+ *   
+ */
+
+var trap = function (nums) {
+    var l = 0, r = nums.length - 1;
+    var leftMax = nums[l], rightMax = nums[r];    
+    var emptyCell = 0;
+
+    while (l < r) {
+        if (nums[l] <= nums[r]) {
+            leftMax = Math.max(leftMax, nums[l])
+            emptyCell += leftMax - nums[l]; 
+            l++;
+        } else {
+            rightMax = Math.max(rightMax, nums[r])
+            emptyCell += rightMax - nums[r];
+            r--;
+        }
+    }
+    return emptyCell;
+};
 
 ```
 
