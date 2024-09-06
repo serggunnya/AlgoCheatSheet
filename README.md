@@ -19,6 +19,7 @@
 - [Math](#math)
 - [Knapsack](#knapsack)
 - [Backtracking](#backtracking)
+   - [Permutations](#permutations)
 - [BFS](#bfs)
 - [DFS](#dfs)
 
@@ -501,6 +502,70 @@ var duplicateZeros = function(arr) {
 ## Knapsack
 
 ## Backtracking
+### [`Permutations`](https://leetcode.com/problems/permutations/)
+ > Задача: Вернуть массив подмассивов со всеми перестановками чисел.
+ > [1,2,3] 
+ 
+```js
+
+/** 
+ *   
+ *   backtrack - > (1),2,3          |  
+ *   backtrack - - > *1,(2),3       |
+ *   backtrack - - - > *1,*2,(3)    |  
+ *   
+ *   backtrack - > (1),2,3          |
+ *   backtrack - - > *1,2,(3)       |
+ *   backtrack - - - > *1,(2),*3    |  
+ *   
+ *   backtrack - > 1,(2),3          |
+ *   backtrack - - > (1),2*,3       |  
+ *   backtrack - - - > *1,*2,(3)    |  
+ *   
+ *   backtrack - > 1,(2),3          |
+ *   backtrack - - > 1*,2*,(3)      |
+ *   backtrack - - - > (1),2*,3*    |  
+ *   
+ *   backtrack - > 1,2,(3)          |
+ *   backtrack - - > (1),2,3*       |
+ *   backtrack - - - > 1*,(2),3*    |  
+ *   
+ *   backtrack - > 1,2,(3)          |
+ *   backtrack - - > 1,(2),3*       |
+ *   backtrack - - - > (1),2*,3*    |  
+ *   [[1,2,3], [1,3.2], [2,1,3],[2,1,3], [3,1,2],[3,2,1]]
+ *   
+ *   Создаётся Set (набор) для записи использованных чисел
+ *   если длина Set равна длине искодного массива, записать набор в ответ
+ *
+ *   запускается цикл 
+ *   Если в наборе нет текущего числа, добавить число в набор и вызвать рекурсию 
+ *   удалить число из набора.
+ *     
+ */
+
+function permute(nums) {
+  function backtrack(nums, used, result) {
+    if (used.size === nums.length) {
+      result.push(Array.from(used));
+      return;
+    }
+    for (var n of nums) {
+      if (!used.has(n)) {
+        used.add(n);
+        backtrack(nums, used, result)
+        used.delete(n);
+      }
+    }
+  }
+
+  var result = [], used = new Set();
+  backtrack(nums, used, result);
+  return result;
+};
+
+
+```
 
 ## BFS
 
