@@ -1,9 +1,10 @@
 # AlgoCheatSheet
 `(Шпаргалка по алгоритмам для подготовки к собеседованию)`
 
+- [Hash & Base](#hash-&-base)
+  - [Monotonic array](#monotonic-array)
 - [Prefix sum](#prefix-sum)
 - [Bucket sort](#bucket-sort)
-- [Hashmap](#hashmap)
 - [Pointers](#pointers)
   - [Move zeroes](#move-zeroes)
   - [Boats to save people](#boats-to-save-people)
@@ -23,11 +24,42 @@
 - [BFS](#bfs)
 - [DFS](#dfs)
 
+## Hash & Base
+### [`Monotonic array`](https://leetcode.com/problems/monotonic-array)
+> Задача: Определить упорядочины (нискодящие/восходящие) ли элементы массива (true) или хаотичны (false).
+> 
+> [5,3,2,4,1] - исходный массив
+
+```javascript
+/** 
+ * 
+ *   Необходимо завести два булевых флага asc и desc;
+ *   и установить им значение на основе сравнения вервых двух элементов.
+ *   При проходе по массиву выключаем флаги. Если элементы понижаются asc = false
+ *   Если элементы повышаются desc = false
+ */
+
+var isMonotonic = function (nums) {
+  if (nums.length === 1 ) return true;
+
+  var asc = nums[0] <= nums[1];
+  var desc = nums[0] >= nums[1];
+
+  for (var i = 2; i < nums.length; i++) {
+    if (nums[i-1] < nums[i]) {
+      desc = false;
+    }
+    if (nums[i-1] > nums[i]) {
+      asc = false;
+    }
+  }
+  return asc || desc;
+};
+```
+
 ## Prefix sum
 
 ## Bucket sort
-
-## Hashmap  
 
 ## Pointers
 
