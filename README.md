@@ -3,6 +3,7 @@
 
 - [Hash & Base](#hash-&-base)
   - [Monotonic array](#monotonic-array)
+  - [largest substring between two equal characters](#largest-substring-between-two-equal-characters/description/)
 - [Prefix sum](#prefix-sum)
 - [Bucket sort](#bucket-sort)
 - [Pointers](#pointers)
@@ -54,6 +55,35 @@ var isMonotonic = function (nums) {
     }
   }
   return asc || desc;
+};
+```
+
+### [`largest substring between two equal characters`](https://leetcode.com/problems/largest-substring-between-two-equal-characters)
+> Задача: Найти максимальную длину подстроки между двумя одинаковых символов
+> 
+> "abca" - исходная строка
+
+```javascript
+/** 
+ * 
+ *   Необходимо завести пустую hashmap и переменную ответа с базовым значением.
+ *   Проходим по строке им заполняем hashmap пока уникальными символами с соответствующим индексом
+ *   Если если символ уже есть в таблице, то мы перезаписываем ответ из максимума предыдущего значенияи
+ *   и разницы текущего индекса - индекса первого парного символа - 1.
+ */
+
+var maxLengthBetweenEqualCharacters = function (s) {
+  var map = {};
+  var ans = -1;
+
+  for (var i = 0; i < s.length; i++) {
+    if (map[s[i]] === undefined) {
+      map[s[i]] = i;
+      continue;
+    }
+    ans = Math.max(ans, (i - 1) - map[s[i]]);
+  }
+  return ans;
 };
 ```
 
