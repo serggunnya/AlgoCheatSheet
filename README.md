@@ -3,7 +3,8 @@
 
 - [Hash & Base](#hash-&-base)
   - [Monotonic array](#monotonic-array)
-  - [largest substring between two equal characters](#largest-substring-between-two-equal-characters/description/)
+  - [Largest substring between two equal characters](#largest-substring-between-two-equal-characters/description/)
+  - [Number of good pairs](#number-of-good-pairs)
 - [Prefix sum](#prefix-sum)
 - [Bucket sort](#bucket-sort)
 - [Pointers](#pointers)
@@ -12,6 +13,7 @@
   - [Valid Palindrome II](#valid-palindrome-ii)
   - [Two sum II input array is sorted`](#two-sum-ii-input-array-is-sorted)
   - [Remove Duplicates II`](#remove-duplicates-ii)
+  - [Number of good pairs](#number-of-good-pairs)
   - [Trapping Rain Water`](#trapping-rain-water)
 - [Sliding window](#sliding-window)
 - [Stack/Queue](#stack-queue)  
@@ -58,7 +60,7 @@ var isMonotonic = function (nums) {
 };
 ```
 
-### [`largest substring between two equal characters`](https://leetcode.com/problems/largest-substring-between-two-equal-characters)
+### [`Largest substring between two equal characters`](https://leetcode.com/problems/largest-substring-between-two-equal-characters)
 > Задача: Найти максимальную длину подстроки между двумя одинаковых символов
 > 
 > "abca" - исходная строка
@@ -84,6 +86,35 @@ var maxLengthBetweenEqualCharacters = function (s) {
     ans = Math.max(ans, (i - 1) - map[s[i]]);
   }
   return ans;
+};
+```
+
+### [`Number of good pairs`](https://leetcode.com/problems/number-of-good-pairs/)
+> Задача: посчитать количиство пар однаковых цифр.
+> 
+> [1,2,3,1,1,3] - исходный массив
+
+```javascript
+/** 
+ * 
+ *   Необходимо завести пустую hashmap и переменную ответа с базовым значением.
+ *   Проходим по смассиву и заполняем hashmap считая числа;
+ *   Если если символ уже есть в таблице, то прибавляем его счетчик к ответу
+ *   
+ */
+
+var numIdenticalPairs = function(nums) {
+    const countMap = {};
+    let count = 0;
+
+    for (let num of nums) {
+        if (countMap[num]) {
+            count += countMap[num];
+        }
+        countMap[num] = (countMap[num] || 0) + 1;
+    }
+
+    return count;
 };
 ```
 
@@ -357,6 +388,40 @@ function removeDuplicates(nums) {
 }
 
 ```
+### [`Number of good pairs`](https://leetcode.com/problems/number-of-good-pairs/)
+> Задача: посчитать количиство пар однаковых цифр.
+> 
+> [1,2,3,1,1,3] - исходный массив
+
+```javascript
+/** 
+ * 
+ *   Необходимо завести два указателя и переменную ответа с базовым значением.
+ *   Проходим по смассиву и заполняем hashmap считая числа;
+ *   пока левый указатель не дошел до конца
+ *   если левый указатель меньше правого и левый элемент равен правому, увечичиваем счетчик и уменьшаем правый указетель
+ *   иначе двигаем левый указатель и возвращаем прваый в конец массива
+ */
+
+var numIdenticalPairs = function (nums) {
+  var l = 0, r = nums.length - 1;
+  var pairCount = 0;
+  while (l < nums.length) {
+    if(l < r ){
+      if(nums[l] == nums[r]){
+        pairCount++;
+      }
+      r--;
+    }else{
+      l++;
+      r = nums.length - 1;
+    }
+  }
+
+  return pairCount;
+};
+```
+
 ### [`Trapping Rain Water`](https://leetcode.com/problems/trapping-rain-water)
 > Задача: Дан массив высот блоков. Посчитать число заполненых водой ечеек.
 > 
