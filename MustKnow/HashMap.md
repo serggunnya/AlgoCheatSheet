@@ -13,7 +13,12 @@ twoSum([3,3],6)       // [0,1]
 ```
 <details>
    <summary><h4>Мышление</h4></summary>
-Text
+
+- Для поиска чисел создадим __new Map()__
+- Проверяем наличие в map разницы чисел `if map[ target - nums[i] ]` 
+   - Если нет, сохраняем в map число `target - nums[i]` и его индекс `map[target - nums[i]] = i`
+   - Если есть, возвращем пару индексов `[map[target - nums[i]], i]`
+      
 </details>
 
 <details>
