@@ -65,12 +65,12 @@ twoSum([3,3],6)       // [0,1]
   
 ```js 
   function twoSum(nums, target) {
-   var hash = new Map();
+   var map = new Map();
    for(let i = 0; i < nums.length; i++){      
-       if(hash.has(target - nums[i])){
-         return [hash.get(target - nums[i]), i];
+       if(map.has(target - nums[i])){
+         return [map.get(target - nums[i]), i];
        }
-       hash.set(nums[i],i);
+       map.set(nums[i],i);
    }
    return [];
   };
@@ -78,3 +78,46 @@ twoSum([3,3],6)       // [0,1]
 
 </details>
 
+---
+
+### [`Leetcode 219. Contains Duplicate II`](https://leetcode.com/problems/contains-duplicate-ii).
+
+> _Дан массив __nums__ и число __K__._
+> 
+> _Верните __true__, если `абсолютная` разница индексов двух __ближайших__ дубликатов __<= K__._
+
+```js
+containsNearbyDuplicate([1,2,3,1], 3)      // true
+containsNearbyDuplicate(1,0,1,1], 1)       // true
+containsNearbyDuplicate([1,2,3,1,2,3], 2)  // false 
+```
+<details>
+   <summary><h4>Мышление</h4></summary>
+
+1) Для быстрого поиска чисел создадим __new Map()__
+2) Проверяем наличие в __map__ чисела `if map[ nums[i] ]` 
+   - Если нет, сохраняем в __map__ текущее число и его индекс `map[nums[i]] = i`
+   - Если есть, сравниваем абсолютную разницу сохраненного индекса и текущего `Math.abs(map[num[i]] - i) <= k`
+      - Если больше __K__ , то перезаписываем число в __map__ с новым текущим индексом.
+
+</details>
+
+<details>
+  <summary><h4>Решение</h4></summary>
+  
+```js 
+  function containsNearbyDuplicate(nums, k) {
+   var map = new Map();
+   for(let i = 0; i < nums.length; i++){      
+       if(map.has(nums[i]) && Math.abs(map.get(nums[i]) - i ) <= k){
+         return true;
+       }
+       map.set(nums[i], i);
+   }
+   return false;
+  };
+```
+
+</details>
+
+---
