@@ -38,6 +38,7 @@ containsDuplicate([1,1,1,3,3,4,3,2,4,2]) // true
 </details>
 
 ---
+---
 
 ### [`Leetcode 1. Two Sum`](https://leetcode.com/problems/two-sum).
 
@@ -79,6 +80,7 @@ twoSum([3,3],6)       // [0,1]
 </details>
 
 ---
+---
 
 ### [`Leetcode 219. Contains Duplicate II`](https://leetcode.com/problems/contains-duplicate-ii).
 
@@ -119,4 +121,64 @@ containsNearbyDuplicate([1,2,3,1,2,3], 2)  // false
 
 </details>
 
+---
+---
+
+### [`Leetcode 242. Valid Anagram`](https://leetcode.com/problems/valid-anagram).
+>[!NOTE]
+> Анаграмма имеет ту же длину и число повторяющихся символов
+
+> _Дано две строки __s__ и __t__._
+> 
+> _Верните __true__, если строка являются анаграмой_
+
+```js
+isAnagram(anagram","nagaram")      // true
+isAnagram("rat","car")             // false 
+```
+<details>
+   <summary><h4>Логика</h4></summary>
+
+1) Если длины строк не совпадают, то это не анаграмма
+2) Для подсчета символов создадим __new Map()__
+3) Ищем символы второй строки в полученой карте __map__
+   - Если симола нет в карте возвращаем __false__
+   - Иначе уменьшаем счетчик символа в __map__
+      - Если количество меньше нуля возвращаем __false__
+
+</details>
+
+<details>
+  <summary><h4>Решение</h4></summary>
+  
+```js 
+var isAnagram = function (s, t) {
+    if (s.length !== t.length) return false;
+
+    var map = new Map();
+    for (var i = 0; i < s.length; i++) {
+        if (map.has(s[i])) {
+            map.set(s[i], map.get(s[i]) + 1);
+        } else {
+            map.set(s[i], 1);
+        }
+    }
+
+    for (var i = 0; i < t.length; i++) {
+        if (!map.has(t[i])) {
+            return false;
+        }
+        
+        map.set(t[i], map.get(t[i]) - 1);        
+        if (map.get(t[i]) < 0) {
+            return false;
+        }
+    }
+    return true;
+};
+```
+
+</details>
+
+---
 ---
