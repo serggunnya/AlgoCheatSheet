@@ -4,9 +4,9 @@
 ---
 ### [`Leetcode 167. Two Sum II`](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted).
 
-> _Дана строка __s__._
+> _Дан массив __nums__._
 > 
-> _Вернуть __true__ если строка палиндром._
+> _Вернуть индексы чисел сумма которых равна __target__._
 
 ```js
 twoSum([2,7,11,15], 9)        // [1,2]
@@ -50,9 +50,9 @@ var twoSum = function (numbers, target) {
 
 ### [`Leetcode 125. Valid Palindrome`](https://leetcode.com/problems/move-zeroes).
 
-> _Дан массив __nums__ю._
+> _Дана строка __s__._
 > 
-> _Переместить нули в конец массива, сохраняя порядок цифр._
+> _Вернуть __true__ если строка палиндром._
 
 ```js
 isPalindrome("A man, a plan, a canal: Panama")   // true "amanaplanacanalpanama" is a palindrome.
