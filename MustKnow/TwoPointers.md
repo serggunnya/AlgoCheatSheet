@@ -47,3 +47,44 @@ var twoSum = function (numbers, target) {
 
 ---
 ---
+
+### [`Leetcode 283. Move Zeroes`](https://leetcode.com/problems/move-zeroes).
+
+> _Дан массив __nums__.
+> 
+> _Переместить нули в конец массива, сохраняя порядок цифр._
+
+```js
+moveZeroes([0,1,0,3,12])   // [1,3,12,0,0]
+```
+<details>
+   <summary><h4>Идея</h4></summary>
+
+1) Для перемещения пар необходимы два указателя
+2) Оба указателя ставим в начало.
+3) __Правый__ указатель перебирает массив. __Левый__ ждет
+   - Если `nums[r] !== 0` меняем местами nums[r] и nums[l]
+   - Двигаем __Левый__ указатель
+      
+</details>
+
+<details>
+  <summary><h4>Решение</h4></summary>
+  
+```js 
+var moveZeroes = function(nums) {
+    for(var r = 0, l = 0; r < nums.length; r++){
+        if(nums[r] !== 0){
+           var temp = nums[l];
+           nums[l] = nums[r];
+           nums[r] = temp;
+           l++;
+        }
+    }
+};
+```
+
+</details>
+
+---
+---
