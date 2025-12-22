@@ -56,8 +56,8 @@ var twoSum = function (numbers, target) {
 
 ```js
 isPalindrome("A man, a plan, a canal: Panama")   // true "amanaplanacanalpanama" is a palindrome.
-isPalindrome("race a car")   // false "raceacar" is not a palindrome.
-isPalindrome(" ")   // true
+isPalindrome("race a car")                       // false "raceacar" is not a palindrome.
+isPalindrome(" ")                                // true
 ```
 <details>
    <summary><h4>Идея</h4></summary>
@@ -92,10 +92,70 @@ var isPalindrome = function (s) {
 
 ---
 ---
+### [`Leetcode 680. Valid Palindrome II`](https://leetcode.com/problems/valid-palindrome-ii).
+
+> _Дана строка __s__._
+> 
+> _Вернуть __true__ если строка станет палиндромом после одаления одного символа._
+
+```js
+validPalindrome("aba")    // true is a palindrome.
+validPalindrome("abca")   // true is a palindrome.
+validPalindrome("abc")    // false
+```
+<details>
+   <summary><h4>Идея</h4></summary>
+
+1) У палиндрома символы совпадаю в обоих направлениях.
+2) Оба указателя ставим в концы строки.
+3) Пока указатели не встретятся
+   - Если `nums[l] !== nums[r] ` return `false`
+   - Иначе
+      - проверяем строку увеличив __левый__ указатель
+      - проверяем строку уменьшив __правый__ указатель
+      - вернуть `true` если один из вариантов правильный
+4) вернуть `true`
+      
+</details>
+
+<details>
+  <summary><h4>Решение</h4></summary>
+  
+```js 
+var validPalindrome = function (s) {
+    function isPalingdome(s, l, r) {
+        while (l < r) {
+            if (s[l] !== s[r]) {
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
+    }
+
+    var l = 0, r = s.length - 1;
+    while (l < r) {
+        if (s[l] !== s[r]) {
+            var testA = isPalingdome(s, l + 1, r);
+            var testB = isPalingdome(s, l, r - 1);
+            return testA || testB;
+        }
+        l++;
+        r--;
+    }
+    return true;
+};
+```
+
+</details>
+
+---
+---
 
 ### [`Leetcode 283. Move Zeroes`](https://leetcode.com/problems/move-zeroes).
 
-> _Дан массив __nums__.
+> _Дан массив __nums__._
 > 
 > _Переместить нули в конец массива, сохраняя порядок цифр._
 
@@ -135,7 +195,7 @@ var moveZeroes = function(nums) {
 ---
 ### [`Leetcode 15. 3Sum`](https://leetcode.com/problems/3sum).
 
-> _Дан массив __nums__.
+> _Дан массив __nums__._
 > 
 > _Найти тройки сумма которых равна нулю, избегая повторений_
 
