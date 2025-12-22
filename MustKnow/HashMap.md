@@ -12,7 +12,7 @@ containsDuplicate([1,2,3,4]) // false
 containsDuplicate([1,1,1,3,3,4,3,2,4,2]) // true
 ```
 <details>
-   <summary><h4>Мышление</h4></summary>
+   <summary><h4>Логика</h4></summary>
 
 1) Для быстрого поиска чисел создадим __new Map()__ (или new Set())
 2) Проверяем наличие в map числа `if map[ nums[i] ]` 
@@ -52,7 +52,7 @@ twoSum([3,2,4],6)     // [1,2]
 twoSum([3,3],6)       // [0,1]
 ```
 <details>
-   <summary><h4>Мышление</h4></summary>
+   <summary><h4>Логика</h4></summary>
 
 1) Для быстрого поиска чисел создадим __new Map()__
 2) Проверяем наличие в map разницы чисел `if map[ target - nums[i] ]` 
@@ -94,7 +94,7 @@ containsNearbyDuplicate(1,0,1,1], 1)       // true
 containsNearbyDuplicate([1,2,3,1,2,3], 2)  // false 
 ```
 <details>
-   <summary><h4>Мышление</h4></summary>
+   <summary><h4>Логика</h4></summary>
 
 1) Для быстрого поиска чисел создадим __new Map()__
 2) Проверяем наличие в __map__ чисела `if map[ nums[i] ]` 
@@ -175,6 +175,62 @@ var isAnagram = function (s, t) {
         }
     }
     return true;
+};
+```
+
+</details>
+
+---
+---
+### [`Leetcode 49. Group Anagrams`](https://leetcode.com/problems/group-anagrams).
+
+> _Дан массив строк __strs__._
+> 
+> _Верните массив с сгрупироваными по общим символам строки_
+
+> [!TIP]
+> Для создания уникального ключа можно использовать Bucket массив
+```js
+groupAnagrams(["eat","tea","tan","ate","nat","bat"])  // [["bat"],["nat","tan"],["ate","eat","tea"]]
+```
+<details>
+   <summary><h4>Логика</h4></summary>
+
+1) Для группировки понадобится __new Map()__
+2) Проходим по строкам
+3) Получаем уникальный ключ на основе используемых символов
+   - Если ключа нет в карте, создаём его и сохраняем строку в группе
+   - Иначе добавляем строку в группу      
+4) Возвращаем группы
+
+
+
+</details>
+
+<details>
+  <summary><h4>Решение</h4></summary>
+  
+```js 
+var groupAnagrams = function(strs) {
+    function getKey(s){
+        var bucket = new Array(26).fill(0);
+        for(var i = 0; i < s.length; i++){
+            bucket[(s[i]).charCodeAt()-97]++;
+        }
+        return bucket.toString()
+    }
+
+    var groups = new Map();
+    for(var i = 0; i < strs.length; i++){
+        var key = getKey(strs[i])  // strs[i].split("").sort().join("");
+        
+        if(!groups.has(key)){
+            groups.set(key, [strs[i]]);
+        }else{
+            groups.get(key).push(strs[i]);
+        }
+    }
+    return Array.from(groups.values())
 };
 ```
 
